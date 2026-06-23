@@ -1,0 +1,39 @@
+.global-hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Make sure users can click through the hearts */
+  overflow: hidden;
+  z-index: 100; /* High enough to be above backgrounds, low enough not to block tooltips */
+}
+
+.global-floating-heart {
+  position: absolute;
+  bottom: -50px;
+  color: var(--color-primary); /* Pink hearts based on primary theme color */
+  opacity: 0;
+  animation-name: global-float-heart;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  font-size: 24px;
+  text-shadow: 0 0 5px rgba(255, 192, 203, 0.5); /* Soft pink glow */
+}
+
+@keyframes global-float-heart {
+  0% {
+    transform: translateY(100px) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--opacity, 0.8);
+  }
+  90% {
+    opacity: var(--opacity, 0.8);
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,118 @@
+.entrance-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.door {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background-color: var(--color-primary);
+  /* Classic light-pink wooden doors with ornate molding simulated via CSS */
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.05);
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.2), rgba(0,0,0,0.05)),
+    linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(0,0,0,0.1));
+}
+
+.door::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 0 0 10px rgba(0,0,0,0.05);
+}
+
+.left-door {
+  left: 0;
+  transform-origin: left;
+  border-right: 2px solid rgba(0,0,0,0.1);
+}
+
+.right-door {
+  right: 0;
+  transform-origin: right;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+.open-button {
+  position: absolute;
+  z-index: 10;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  border: 4px solid var(--color-gold);
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  animation: pulse-gold 2s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.open-button:hover {
+  background-color: #fff0f5;
+}
+
+.hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -20px;
+  color: var(--color-primary);
+  opacity: 0;
+  animation-name: float-heart;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  font-size: 24px;
+  text-shadow: 0 0 5px rgba(255, 192, 203, 0.5);
+}
+
+.welcome-anim-container {
+  position: absolute;
+  z-index: 5;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.welcome-anim-image {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}

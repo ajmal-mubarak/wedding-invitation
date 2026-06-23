@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300&family=Quicksand:wght@300;400;500&family=Cinzel:wght@400;500&display=swap');
+
+:root {
+  --color-primary: #ffd1dc; /* Light pink */
+  --color-gold: #d4af37; /* Gold */
+  --color-gold-light: #f3e5ab;
+  --color-bg: #fafafa;
+  --color-text: #333333;
+  --font-heading: 'Jost', sans-serif; /* For Neoteric alternative */
+  --font-title: 'Quicksand', sans-serif; /* For Bellerose alternative */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-title);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes pulse-gold {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(212, 175, 55, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes float-heart {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.heading-font {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.title-font {
+  font-family: var(--font-title);
+}
+
+.gold-text {
+  color: var(--color-gold);
+}
+
+/* Base Utility Classes */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.absolute-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
