@@ -1,67 +1,18 @@
-.hero-scroll-container {
-  position: relative;
-  width: 100vw;
-  height: 120vh; /* Taller to allow scroll effect */
-  background-color: var(--color-bg);
-}
-
-.hero-sticky-container {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.hero-image-container {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hero-section {
   width: 100%;
-  height: 100%;
-  will-change: transform;
+  background-color: var(--color-bg);
+  line-height: 0; /* removes bottom gap under img */
 }
 
 .hero-image {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.hero-overlay {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 40px 80px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-.elegant-title {
-  font-size: 4rem;
-  margin-bottom: 10px;
-  color: var(--color-gold);
-}
-
-.elegant-subtitle {
-  font-size: 1.2rem;
-  color: var(--color-text);
-  letter-spacing: 0.3em;
+  height: auto;
 }
 
 @media (max-width: 768px) {
-  .elegant-title {
-    font-size: 2.5rem;
-  }
-  .hero-overlay {
-    padding: 30px 40px;
+  .hero-image {
+    width: 100%;
+    height: auto;
   }
 }

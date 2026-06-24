@@ -8,7 +8,6 @@ const Entrance = ({ onOpen }) => {
   const [hearts, setHearts] = useState([]);
 
   useEffect(() => {
-    // Generate static array of hearts to avoid React re-renders for animations
     const heartCount = 40;
     const newHearts = Array.from({ length: heartCount }).map((_, i) => ({
       id: i,
@@ -24,7 +23,7 @@ const Entrance = ({ onOpen }) => {
 
   const handleOpen = () => {
     setIsOpen(true);
-    
+
     confetti({
       particleCount: 150,
       spread: 80,
@@ -35,81 +34,79 @@ const Entrance = ({ onOpen }) => {
     setTimeout(() => {
       setIsDone(true);
       onOpen();
-    }, 2500); // Wait for doors and Bismillah to finish
+    }, 2500);
   };
 
   return (
     <AnimatePresence>
       {!isDone && (
-        <motion.div 
+        <motion.div
           className="entrance-container"
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
         >
-      {/* Background Hearts */}
-      <div className="hearts-container">
-        {hearts.map((heart) => (
-          <div
-            key={heart.id}
-            className="floating-heart"
-            style={{
-              left: heart.left,
-              animationDuration: heart.animationDuration,
-              animationDelay: heart.animationDelay,
-              transform: `scale(${heart.scale})`,
-            }}
-          >
-            &#10084;
+          {/* Background Hearts */}
+          <div className="hearts-container">
+            {hearts.map((heart) => (
+              <div
+                key={heart.id}
+                className="floating-heart"
+                style={{
+                  left: heart.left,
+                  animationDuration: heart.animationDuration,
+                  animationDelay: heart.animationDelay,
+                  transform: `scale(${heart.scale})`,
+                }}
+              >
+                &#10084;
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <AnimatePresence>
-        {!isOpen && (
-          <>
-            <motion.div
-              className="door left-door"
-              initial={{ x: 0 }}
-              exit={{ x: '-100%' }}
-              transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
-            />
-            <motion.div
-              className="door right-door"
-              initial={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
-            />
-            
-            <motion.button
-              className="open-button"
-              onClick={handleOpen}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              Open
-            </motion.button>
-          </>
-        )}
-      </AnimatePresence>
+          <AnimatePresence>
+            {!isOpen && (
+              <>
+                {/* LEFT DOOR — shows left half of the image */}
+                <motion.div
+                  className="door left-door"
+                  initial={{ x: 0 }}
+                  exit={{ x: '-100%' }}
+                  transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <picture>
+                    <source media="(max-width: 768px)" srcSet="/opendoormobile.png" />
+                    <img src="/opendoordesk.png" alt="" className="door-image door-image-left" />
+                  </picture>
+                </motion.div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="welcome-anim-container"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, delay: 0.5, ease: 'easeInOut' }}
-          >
-            <picture>
-              <source media="(max-width: 768px)" srcSet="/openanimmobile.png" />
-              <img src="/openanimdesktop.png" alt="Welcome Animation" className="welcome-anim-image" />
-            </picture>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {/* RIGHT DOOR — shows right half of the image */}
+                <motion.div
+                  className="door right-door"
+                  initial={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <picture>
+                    <source media="(max-width: 768px)" srcSet="/opendoormobile.png" />
+                    <img src="/opendoordesk.png" alt="" className="door-image door-image-right" />
+                  </picture>
+                </motion.div>
+
+                <motion.button
+                  className="open-button"
+                  onClick={handleOpen}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Open
+                </motion.button>
+              </>
+            )}
+          </AnimatePresence>
+
+
         </motion.div>
       )}
     </AnimatePresence>
