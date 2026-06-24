@@ -13,6 +13,46 @@
   z-index: 2;
 }
 
+/* ── Circle map icon ── */
+.venue-map-circle {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--color-gold);
+  box-shadow:
+    0 0 0 6px rgba(212, 175, 55, 0.12),
+    0 8px 28px rgba(212, 175, 55, 0.18);
+  text-decoration: none;
+  color: var(--color-gold);
+  margin-bottom: 32px;
+  animation: pulse-gold 2.5s infinite;
+  transition: transform 0.25s ease;
+}
+
+.venue-map-circle:hover {
+  transform: scale(1.08);
+}
+
+.venue-pin-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.venue-map-label {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
 .map-frame {
   width: 100%;
   height: 400px;

@@ -1,0 +1,123 @@
+.ayah-section {
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #fff8f8 0%, #faf5ec 100%);
+}
+
+.ayah-card {
+  max-width: 680px;
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid var(--color-gold-light);
+  border-radius: 4px;
+  padding: 48px 40px;
+  text-align: center;
+  position: relative;
+  box-shadow:
+    0 2px 20px rgba(212, 175, 55, 0.08),
+    0 8px 40px rgba(0, 0, 0, 0.06);
+
+  /* Subtle corner glow */
+  background-image:
+    radial-gradient(ellipse at top left, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.06) 0%, transparent 60%);
+}
+
+/* Corner accents */
+.ayah-card::before,
+.ayah-card::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-gold);
+  border-style: solid;
+}
+.ayah-card::before {
+  top: 10px;
+  left: 10px;
+  border-width: 2px 0 0 2px;
+}
+.ayah-card::after {
+  bottom: 10px;
+  right: 10px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ── Ornaments ── */
+.ayah-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 28px;
+}
+.ayah-ornament.bottom {
+  margin: 28px 0 0;
+}
+
+.ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+  max-width: 120px;
+}
+
+.ornament-diamond {
+  color: var(--color-gold);
+  font-size: 10px;
+}
+
+/* ── Arabic text ── */
+.ayah-arabic {
+  font-family: 'Scheherazade New', 'Amiri', 'Traditional Arabic', serif;
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  line-height: 2.2;
+  color: #2c1a0e;
+  direction: rtl;
+  text-align: center;
+  margin-bottom: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── Divider ── */
+.ayah-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--color-gold);
+  margin: 28px auto;
+  opacity: 0.6;
+}
+
+/* ── Translation ── */
+.ayah-translation {
+  font-family: var(--font-title);
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  color: #555;
+  line-height: 1.85;
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* ── Reference ── */
+.ayah-reference {
+  margin-top: 18px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .ayah-card {
+    padding: 36px 24px;
+  }
+
+  .ayah-arabic {
+    font-size: 1.25rem;
+  }
+}

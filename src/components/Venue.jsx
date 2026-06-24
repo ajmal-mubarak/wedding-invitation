@@ -6,7 +6,26 @@ const Venue = () => {
   return (
     <footer className="venue-section">
       <div className="venue-container">
-        <h2 className="heading-font gold-text section-title">Our Wedding Venue</h2>
+        {/* Map circle icon — replaces boring heading */}
+        <motion.a
+          href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d487.7586256424381!2d75.68077234217867!3d12.03877039424914"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="venue-map-circle"
+          aria-label="Open in Google Maps"
+          initial={{ opacity: 0, scale: 0.7 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" className="venue-pin-icon">
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"
+              fill="currentColor"
+            />
+          </svg>
+          <span className="venue-map-label">Venue</span>
+        </motion.a>
         
         <motion.div 
           className="map-frame"

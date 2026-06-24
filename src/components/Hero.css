@@ -1,18 +1,32 @@
 .hero-section {
+  /* No fixed height — section grows to fit the image naturally */
   width: 100%;
+  line-height: 0; /* removes default inline gap under <img> */
   background-color: var(--color-bg);
-  line-height: 0; /* removes bottom gap under img */
+}
+
+/* This clips the zoom so it never spills outside the hero boundaries */
+.hero-clip {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* The motion.div that receives the scale transform */
+.hero-image-wrapper {
+  width: 100%;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* picture and img fill 100% width, height follows natural aspect ratio */
+.hero-image-wrapper picture {
+  display: block;
+  width: 100%;
 }
 
 .hero-image {
   display: block;
-  width: 100%;
-  height: auto;
-}
-
-@media (max-width: 768px) {
-  .hero-image {
-    width: 100%;
-    height: auto;
-  }
+  width: 100%;     /* always fills full width */
+  height: auto;    /* height auto = full image shown, no crop, no bars */
+  object-fit: fill; /* fill means no aspect-ratio override — just the raw image */
 }

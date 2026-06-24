@@ -23,6 +23,7 @@ const Entrance = ({ onOpen }) => {
 
   const handleOpen = () => {
     setIsOpen(true);
+    onOpen(); // Start fading in main content immediately as doors open
 
     confetti({
       particleCount: 150,
@@ -32,9 +33,8 @@ const Entrance = ({ onOpen }) => {
     });
 
     setTimeout(() => {
-      setIsDone(true);
-      onOpen();
-    }, 2500);
+      setIsDone(true); // Remove entrance overlay after animation completes
+    }, 1000);
   };
 
   return (
@@ -43,7 +43,7 @@ const Entrance = ({ onOpen }) => {
         <motion.div
           className="entrance-container"
           exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.4 }}
         >
           {/* Background Hearts */}
           <div className="hearts-container">
@@ -71,7 +71,7 @@ const Entrance = ({ onOpen }) => {
                   className="door left-door"
                   initial={{ x: 0 }}
                   exit={{ x: '-100%' }}
-                  transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <picture>
                     <source media="(max-width: 768px)" srcSet="/opendoormobile.png" />
@@ -84,7 +84,7 @@ const Entrance = ({ onOpen }) => {
                   className="door right-door"
                   initial={{ x: 0 }}
                   exit={{ x: '100%' }}
-                  transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <picture>
                     <source media="(max-width: 768px)" srcSet="/opendoormobile.png" />

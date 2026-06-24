@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Entrance from './components/Entrance';
 import Hero from './components/Hero';
 import CountdownSection from './components/CountdownSection';
-import Timeline from './components/Timeline';
+import AyahSection from './components/AyahSection';
 import Venue from './components/Venue';
 import FloatingHearts from './components/FloatingHearts';
 
@@ -21,12 +21,13 @@ function App() {
       */}
       <main style={{ 
         opacity: isEntered ? 1 : 0, 
-        transition: 'opacity 1s ease-in',
-        pointerEvents: isEntered ? 'auto' : 'none'
+        transition: 'opacity 0.6s ease-in',
+        pointerEvents: isEntered ? 'auto' : 'none',
+        visibility: isEntered ? 'visible' : 'hidden'
       }}>
         <Hero />
         <CountdownSection />
-        <Timeline />
+        <AyahSection />
         <Venue />
       </main>
     </>
