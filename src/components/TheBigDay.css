@@ -1,0 +1,112 @@
+.scratch-section-custom {
+  padding: 60px 20px;
+  background-color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.scratch-section-title {
+  color: var(--color-gold); /* Gold title as in the screenshot */
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 35px;
+}
+
+/* Card container that wraps both revealed content and canvas */
+.scratch-card-container {
+  width: 100%;
+  max-width: 420px;
+  height: 140px;
+  position: relative;
+  background-color: var(--color-burgundy);
+  border: 1px solid var(--color-gold);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Revealed details inside the card */
+.revealed-details-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--color-cream);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Swapped layout typography: Date Big, Place Small */
+.revealed-datetime-large {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-cream);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.wave-divider.gold-small-scratch {
+  width: 120px;
+  margin: 4px 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.revealed-location-small {
+  font-size: 13px;
+  color: var(--color-gold);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 2px;
+}
+
+.revealed-address-small {
+  font-size: 12px;
+  opacity: 0.85;
+  font-style: italic;
+}
+
+/* Scratchable Canvas layer */
+.scratch-card-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: pointer;
+  touch-action: none; /* Prevents scrolling while scratching on mobile */
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .scratch-section-title {
+    font-size: 26px;
+  }
+  .scratch-card-container {
+    max-width: 340px;
+    height: 130px;
+  }
+  .revealed-datetime-large {
+    font-size: 18px;
+  }
+  .revealed-location-small {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .revealed-address-small {
+    font-size: 11px;
+  }
+}

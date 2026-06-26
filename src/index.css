@@ -1,13 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300&family=Quicksand:wght@300;400;500&family=Cinzel:wght@400;500&family=Scheherazade+New:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  --color-primary: #ffd1dc; /* Light pink */
-  --color-gold: #d4af37; /* Gold */
-  --color-gold-light: #f3e5ab;
-  --color-bg: #fafafa;
-  --color-text: #333333;
-  --font-heading: 'Jost', sans-serif; /* For Neoteric alternative */
-  --font-title: 'Quicksand', sans-serif; /* For Bellerose alternative */
+  --color-burgundy: #5C161E; /* Rich primary burgundy */
+  --color-burgundy-dark: #3A080D; /* Deep dark burgundy for text/accents */
+  --color-burgundy-light: #8B2635; /* Soft burgundy for subtle styling */
+  --color-cream: #FAF6F0; /* Soft warm paper cream background */
+  --color-cream-light: #FCFAF6; /* Lighter cream for cards/sections */
+  --color-gold: #C5A880; /* Elegant muted bronze gold */
+  --color-gold-glow: rgba(197, 168, 128, 0.4);
+  
+  --font-script: 'Pinyon Script', cursive;
+  --font-serif-heading: 'Playfair Display', serif;
+  --font-serif-body: 'Cormorant Garamond', serif;
+  --font-sans: 'Jost', sans-serif;
 }
 
 * {
@@ -17,72 +22,89 @@
 }
 
 body {
-  font-family: var(--font-title);
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  font-family: var(--font-serif-body);
+  background-color: var(--color-cream);
+  color: var(--color-burgundy-dark);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 #root {
   overflow-x: hidden;
+  width: 100%;
 }
 
-/* Animations */
-@keyframes pulse-gold {
-  0% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 20px rgba(212, 175, 55, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
-  }
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-burgundy);
 }
 
-@keyframes float-heart {
-  0% {
-    transform: translateY(100vh) scale(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-10vh) scale(1.5);
-    opacity: 0;
-  }
+/* Typography Utility Classes */
+.font-script {
+  font-family: var(--font-script);
 }
 
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.font-serif-heading {
+  font-family: var(--font-serif-heading);
 }
 
-.heading-font {
-  font-family: var(--font-heading);
+.font-serif-body {
+  font-family: var(--font-serif-body);
+}
+
+.font-sans-spaced {
+  font-family: var(--font-sans);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  font-weight: 300;
 }
 
-.title-font {
-  font-family: var(--font-title);
-}
-
+/* Colors & Dividers */
 .gold-text {
   color: var(--color-gold);
 }
 
-/* Base Utility Classes */
+.burgundy-text {
+  color: var(--color-burgundy-dark);
+}
+
+/* Elegant horizontal gold dividers with center diamonds */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  width: 150px;
+}
+
+.gold-divider::before,
+.gold-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--direction, right), transparent, var(--color-gold), transparent);
+}
+
+.gold-divider-diamond {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--color-gold);
+  transform: rotate(45deg);
+  margin: 0 10px;
+  background: transparent;
+}
+
+/* Layout Utilities */
 .flex-center {
   display: flex;
   justify-content: center;
@@ -95,4 +117,22 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Global Animations */
+@keyframes float-sparkle {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--sparkle-opacity, 0.6);
+  }
+  90% {
+    opacity: var(--sparkle-opacity, 0.6);
+  }
+  100% {
+    transform: translateY(-10vh) translateX(var(--sparkle-drift, 20px)) scale(var(--sparkle-scale, 1.2)) rotate(360deg);
+    opacity: 0;
+  }
 }

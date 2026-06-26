@@ -1,99 +1,335 @@
-.venue-section {
-  padding: 80px 20px 40px;
-  background-color: var(--color-bg);
-  text-align: center;
-  position: relative;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+.venue-footer-container {
+  width: 100%;
 }
 
-.venue-container {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-/* ── Circle map icon ── */
-.venue-map-circle {
-  display: inline-flex;
+/* 1. Venue Section (Burgundy Background as in Screenshot) */
+.venue-section-custom {
+  padding: 60px 20px 50px;
+  background-color: var(--color-burgundy);
+  color: var(--color-cream);
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--color-gold);
-  box-shadow:
-    0 0 0 6px rgba(212, 175, 55, 0.12),
-    0 8px 28px rgba(212, 175, 55, 0.18);
-  text-decoration: none;
-  color: var(--color-gold);
-  margin-bottom: 32px;
-  animation: pulse-gold 2.5s infinite;
-  transition: transform 0.25s ease;
+  text-align: center;
 }
 
-.venue-map-circle:hover {
-  transform: scale(1.08);
+.venue-subtitle {
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: var(--color-cream);
+  opacity: 0.95;
 }
 
-.venue-pin-icon {
-  width: 30px;
-  height: 30px;
-}
-
-.venue-map-label {
-  font-family: var(--font-heading);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-}
-
-.map-frame {
-  width: 100%;
-  height: 400px;
-  border: 4px solid var(--color-gold);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  margin-bottom: 60px;
-  padding: 5px;
-  background-color: white;
-}
-
-.footer-content {
-  margin-top: 60px;
-  padding-bottom: 40px;
-}
-
-.footer-content h3 {
-  font-size: 2rem;
-  color: var(--color-text);
+.venue-main-title {
+  font-size: 32px;
+  font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-cream);
+}
+
+/* Wave/Tilde Divider style */
+.wave-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  margin: 0 auto 35px;
+}
+
+.wave-line {
+  flex: 1;
+  height: 0.5px;
+  background-color: var(--color-gold);
+  opacity: 0.6;
+}
+
+.wave-tilde {
+  font-family: var(--font-serif-body);
+  font-size: 16px;
+  color: var(--color-gold);
+  margin: 0 10px;
+  position: relative;
+  top: -1px;
+}
+
+.wave-divider.light .wave-line {
+  background-color: var(--color-cream);
+  opacity: 0.35;
+}
+
+.wave-divider.light .wave-tilde {
+  color: var(--color-gold);
+}
+
+.wave-divider.gold-small {
+  width: 100px;
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+/* Ballroom sketch card frame (Cream background card standing out against burgundy) */
+.venue-sketch-card {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
+  background-color: var(--color-cream); /* Cream page background */
+  border: 1px solid var(--color-gold);
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+  border-radius: 12px;
+}
+
+.sketch-image-wrapper {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(197, 168, 128, 0.4);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.sketch-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.95;
+}
+
+.venue-location-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: var(--color-cream);
+}
+
+.venue-description {
+  font-size: 15px;
+  max-width: 300px;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  color: var(--color-cream);
+  opacity: 0.9;
+}
+
+/* View map button (Gold border, cream text on burgundy) */
+.view-map-btn {
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  color: var(--color-cream);
+  padding: 12px 24px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.btn-pin-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  color: var(--color-gold);
+}
+
+.view-map-btn:hover {
+  background-color: var(--color-cream);
+  color: var(--color-burgundy-dark);
+  border-color: var(--color-cream);
+  box-shadow: 0 4px 15px rgba(250, 246, 240, 0.2);
+}
+
+/* 2. Date & Time Section (Burgundy Background) */
+.datetime-section {
+  background-color: var(--color-burgundy);
+  color: var(--color-cream);
+  padding: 60px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1.5px solid var(--color-burgundy-dark); /* darker boundary divider */
+  border-bottom: 1.5px solid var(--color-burgundy-dark);
+}
+
+.datetime-time {
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.datetime-date {
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  margin-bottom: 25px;
+  opacity: 0.95;
+}
+
+.datetime-note {
+  font-size: 14px;
+  font-style: italic;
+  max-width: 280px;
+  line-height: 1.6;
+  color: var(--color-gold);
+}
+
+/* 3. Adults Only Section (Cream Background) */
+.adults-only-section {
+  background-color: var(--color-cream);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.adults-card {
+  width: 100%;
+  max-width: 380px;
+  background-color: var(--color-burgundy);
+  color: var(--color-cream);
+  border: 1px solid var(--color-gold);
+  padding: 30px 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Corner bracket lines */
+.card-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--color-gold);
+}
+
+.card-corner.top-left {
+  top: 8px;
+  left: 8px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.card-corner.top-right {
+  top: 8px;
+  right: 8px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.card-corner.bottom-left {
+  bottom: 8px;
+  left: 8px;
+  border-right: none;
+  border-top: none;
+}
+
+.card-corner.bottom-right {
+  bottom: 8px;
+  right: 8px;
+  border-left: none;
+  border-top: none;
+}
+
+.adults-card-text {
+  font-size: 15px;
+  line-height: 1.7;
+  font-style: italic;
+  opacity: 0.95;
+}
+
+/* 4. Footer (Burgundy Background) */
+.invitation-footer {
+  background-color: var(--color-burgundy-dark);
+  color: var(--color-cream);
+  padding: 60px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer-names {
-  font-size: 1.5rem;
-  letter-spacing: 0.2em;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.footer-hearts {
-  position: absolute;
-  bottom: 0;
+.footer-date {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.footer-rings-container {
+  color: var(--color-gold);
+  opacity: 0.8;
+}
+
+.footer-rings-svg {
+  width: 75px;
+  height: 50px;
+}
+
+/* MAP MODAL OVERLAY */
+.map-modal-overlay {
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(to top, rgba(255, 209, 220, 0.2), transparent);
-  pointer-events: none;
-  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
 }
 
-@media (max-width: 768px) {
-  .map-frame {
-    height: 300px;
+.map-modal-card {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-gold);
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.map-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--color-burgundy-dark);
+  cursor: pointer;
+  z-index: 2010;
+  outline: none;
+  font-weight: 300;
+}
+
+.map-modal-close:hover {
+  color: var(--color-gold);
+}
+
+@media (max-width: 480px) {
+  .venue-main-title {
+    font-size: 26px;
+  }
+  .datetime-time {
+    font-size: 38px;
+  }
+  .footer-names {
+    font-size: 24px;
+  }
+  .map-modal-card {
+    height: 320px;
   }
 }

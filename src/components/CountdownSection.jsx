@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './CountdownSection.css';
 
 const CountdownSection = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [isScratched, setIsScratched] = useState(false);
-  const canvasRef = useRef(null);
-  const targetDate = new Date('2026-08-09T12:00:00').getTime(); // Updated wedding date
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
+  const targetDate = new Date('2026-08-09T12:00:00').getTime(); // August 9th, 2026 at 12 PM
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const calculateTime = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -17,148 +15,142 @@ const CountdownSection = () => {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
           hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
         });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0 });
       }
-    }, 1000);
+    };
+
+    calculateTime();
+    const timer = setInterval(calculateTime, 60000); // Update every minute
     return () => clearInterval(timer);
   }, [targetDate]);
 
-  // Scratch card logic
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    
-    // Fill with stylized textured overlay
-    ctx.fillStyle = '#d4af37'; // Gold base
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Add some noise for texture
-    for(let i = 0; i < 5000; i++) {
-        ctx.fillStyle = Math.random() > 0.5 ? '#e5c158' : '#c39d26';
-        ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 2, 2);
-    }
-    
-    ctx.font = '24px Jost';
-    ctx.fillStyle = 'rgba(255,255,255,0.7)';
-    ctx.textAlign = 'center';
-    ctx.fillText('SCRATCH TO REVEAL', canvas.width/2, canvas.height/2 + 8);
-
-    let isDrawing = false;
-    let scratchedPixels = 0;
-    const totalPixels = canvas.width * canvas.height;
-
-    const scratch = (x, y) => {
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.beginPath();
-      ctx.arc(x, y, 30, 0, Math.PI * 2, false);
-      ctx.fill();
-      
-      // Calculate scratched area (rough estimation)
-      scratchedPixels += Math.PI * 30 * 30;
-      if (scratchedPixels / totalPixels > 0.8 && !isScratched) {
-        setIsScratched(true);
-        // Fade out canvas
-        canvas.style.transition = 'opacity 1s';
-        canvas.style.opacity = '0';
-        setTimeout(() => canvas.style.display = 'none', 1000);
-      }
-    };
-
-    const getCoords = (clientX, clientY) => {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      return [
-        (clientX - rect.left) * scaleX,
-        (clientY - rect.top) * scaleY
-      ];
-    };
-
-    const handleMouseDown = (e) => { 
-      isDrawing = true; 
-      const [x, y] = getCoords(e.clientX, e.clientY);
-      scratch(x, y); 
-    };
-    const handleMouseMove = (e) => { 
-      if (isDrawing) {
-        const [x, y] = getCoords(e.clientX, e.clientY);
-        scratch(x, y); 
-      }
-    };
-    const handleMouseUp = () => { isDrawing = false; };
-
-    canvas.addEventListener('mousedown', handleMouseDown);
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('mouseup', handleMouseUp);
-    canvas.addEventListener('mouseleave', handleMouseUp);
-
-    // Touch support
-    const handleTouchStart = (e) => {
-      e.preventDefault();
-      isDrawing = true;
-      const [x, y] = getCoords(e.touches[0].clientX, e.touches[0].clientY);
-      scratch(x, y);
-    };
-    const handleTouchMove = (e) => {
-      e.preventDefault();
-      if (isDrawing) {
-        const [x, y] = getCoords(e.touches[0].clientX, e.touches[0].clientY);
-        scratch(x, y);
-      }
-    };
-
-    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-    canvas.addEventListener('touchend', handleMouseUp);
-
-    return () => {
-      canvas.removeEventListener('mousedown', handleMouseDown);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseup', handleMouseUp);
-      canvas.removeEventListener('mouseleave', handleMouseUp);
-      canvas.removeEventListener('touchstart', handleTouchStart);
-      canvas.removeEventListener('touchmove', handleTouchMove);
-      canvas.removeEventListener('touchend', handleMouseUp);
-    };
-  }, [isScratched]);
-
   return (
     <section className="countdown-section">
-      <h2 className="heading-font gold-text section-title">The Big Day</h2>
-      
-      <div className="scratch-container">
-        <div className="revealed-content">
-          <h3 className="title-font">The Most Holy Rosary Chapel</h3>
-          <p className="title-font">Edwin Andrews Air Base Isabel, sta. Maria, Zamboanga City</p>
-          <p className="heading-font gold-text date-time">9/8/2026 at 12 PM</p>
-        </div>
-        {!isScratched && (
-          <canvas 
-            ref={canvasRef} 
-            width={600} 
-            height={200} 
-            className="scratch-canvas"
-          />
-        )}
-      </div>
+      {/* Top Envelope Icon Doodle */}
+      <motion.div 
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="doodle-top-container"
+      >
+        <svg viewBox="0 0 100 100" className="doodle-envelope">
+          <rect x="25" y="15" width="50" height="60" rx="2" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <line x1="25" y1="45" x2="75" y2="45" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M43 45 C41 40 45 38 48 43 C50 43 50 44 48 45" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M57 45 C59 40 55 38 52 43 C50 43 50 44 52 45" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M49 45 Q47 52 45 55" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M51 45 Q53 52 55 55" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <line x1="32" y1="25" x2="68" y2="25" stroke="currentColor" strokeWidth="1" strokeDasharray="1.5 1.5" />
+          <line x1="32" y1="32" x2="60" y2="32" stroke="currentColor" strokeWidth="1" strokeDasharray="1.5 1.5" />
+        </svg>
+      </motion.div>
 
-      <div className="countdown-timer">
-        {Object.entries(timeLeft).map(([unit, value]) => (
-          <div key={unit} className="time-block">
-            <motion.div 
-              key={value}
-              initial={{ scale: 1.2, opacity: 0.5 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="time-value title-font gold-text"
-            >
-              {value.toString().padStart(2, '0')}
-            </motion.div>
-            <div className="time-label heading-font">{unit.toUpperCase()}</div>
-          </div>
-        ))}
+      {/* Main Countdown Headers */}
+      <motion.h2 
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="font-serif-heading countdown-heading"
+      >
+        Countdown
+      </motion.h2>
+      
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="font-serif-body countdown-subheading"
+      >
+        to the day our hearts unite
+      </motion.p>
+
+      {/* Countdown Digits */}
+      <motion.div 
+        initial={{ opacity: 0, y: 35 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="countdown-digits-wrapper"
+      >
+        <span className="font-serif-heading digit-num">
+          {timeLeft.days.toString().padStart(2, '0')}
+        </span>
+        <span className="digit-separator">.</span>
+        <span className="font-serif-heading digit-num">
+          {timeLeft.hours.toString().padStart(2, '0')}
+        </span>
+        <span className="digit-separator">.</span>
+        <span className="font-serif-heading digit-num">
+          {timeLeft.minutes.toString().padStart(2, '0')}
+        </span>
+      </motion.div>
+
+      {/* Countdown Labels */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="countdown-labels-wrapper"
+      >
+        <span className="font-sans-spaced digit-label">DAYS</span>
+        <span className="font-sans-spaced digit-label">HOURS</span>
+        <span className="font-sans-spaced digit-label">MINUTES</span>
+      </motion.div>
+
+      {/* Bottom Doodles */}
+      <div className="countdown-bottom-doodles">
+        {/* Left Doodle: Two Candles */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 0.45, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="doodle-bottom-left"
+        >
+          <svg viewBox="0 0 80 150" className="doodle-candles">
+            <path d="M15 110 L45 110 M30 110 L30 135 M15 135 L45 135" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <rect x="22" y="50" width="6" height="60" rx="1" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <rect x="37" y="35" width="6" height="75" rx="1" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M25 38 Q22 44 25 48 Q28 44 25 38 Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M40 23 Q37 29 40 33 Q43 29 40 23 Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M15 95 Q30 105 45 95" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
+        </motion.div>
+
+        {/* Right Doodle: Flower Bouquet */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 0.45, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="doodle-bottom-right"
+        >
+          <svg viewBox="0 0 100 150" className="doodle-bouquet">
+            <path d="M25 125 L50 70 L75 125 Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M20 70 L50 125 L80 70" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="50" cy="115" r="3" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M47 115 C42 110 42 120 47 115 Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M53 115 C58 110 58 120 53 115 Z" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M49 117 L44 130" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M51 117 L56 130" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="50" cy="50" r="14" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="36" cy="62" r="12" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <circle cx="64" cy="62" r="12" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M50 50 A 6 6 0 0 1 47 45 A 3 3 0 0 1 50 48" fill="none" stroke="currentColor" strokeWidth="1" />
+            <path d="M36 62 A 5 5 0 0 1 33 58 A 2 2 0 0 1 36 60" fill="none" stroke="currentColor" strokeWidth="1" />
+            <path d="M64 62 A 5 5 0 0 1 61 58 A 2 2 0 0 1 64 60" fill="none" stroke="currentColor" strokeWidth="1" />
+            <path d="M26 50 Q30 38 42 42" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M74 50 Q70 38 58 42" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M50 36 Q50 24 45 28" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
+        </motion.div>
       </div>
     </section>
   );

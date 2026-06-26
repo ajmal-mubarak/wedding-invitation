@@ -1,112 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import './Entrance.css';
 
 const Entrance = ({ onOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hearts, setHearts] = useState([]);
-
-  useEffect(() => {
-    const heartCount = 40;
-    const newHearts = Array.from({ length: heartCount }).map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      animationDuration: `${Math.random() * 5 + 5}s`,
-      animationDelay: `${Math.random() * 5}s`,
-      scale: Math.random() * 0.5 + 0.5,
-    }));
-    setHearts(newHearts);
-  }, []);
-
-  const [isDone, setIsDone] = useState(false);
 
   const handleOpen = () => {
     setIsOpen(true);
-    onOpen(); // Start fading in main content immediately as doors open
-
+    
+    // Confetti burst
     confetti({
       particleCount: 150,
       spread: 80,
       origin: { y: 0.6 },
-      colors: ['#ffd1dc', '#d4af37', '#ffffff']
+      colors: ['#ffd1dc', '#c5a880', '#ffffff', '#5c161e']
     });
 
+    // Notify App to reveal content and play music
     setTimeout(() => {
-      setIsDone(true); // Remove entrance overlay after animation completes
-    }, 1000);
+      onOpen();
+    }, 800);
   };
 
   return (
     <AnimatePresence>
-      {!isDone && (
+      {!isOpen && (
         <motion.div
-          className="entrance-container"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
+          className="entrance-overlay"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
         >
-          {/* Background Hearts */}
-          <div className="hearts-container">
-            {hearts.map((heart) => (
-              <div
-                key={heart.id}
-                className="floating-heart"
-                style={{
-                  left: heart.left,
-                  animationDuration: heart.animationDuration,
-                  animationDelay: heart.animationDelay,
-                  transform: `scale(${heart.scale})`,
-                }}
-              >
-                &#10084;
+          {/* Envelope Card */}
+          <motion.div 
+            className="envelope-card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+          >
+            {/* Double Border Frame */}
+            <div className="envelope-inner-border">
+              <span className="font-sans-spaced envelope-label">The Wedding Of</span>
+              
+              {/* Gold Divider Line with dot */}
+              <div className="envelope-dot-divider">
+                <div className="divider-line"></div>
+                <div className="divider-dot"></div>
+                <div className="divider-line"></div>
               </div>
-            ))}
-          </div>
 
-          <AnimatePresence>
-            {!isOpen && (
-              <>
-                {/* LEFT DOOR — shows left half of the image */}
-                <motion.div
-                  className="door left-door"
-                  initial={{ x: 0 }}
-                  exit={{ x: '-100%' }}
-                  transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  <picture>
-                    <source media="(max-width: 768px)" srcSet="/opendoormobile.png" />
-                    <img src="/opendoordesk.png" alt="" className="door-image door-image-left" />
-                  </picture>
-                </motion.div>
+              {/* Calligraphy Monogram */}
+              <div className="font-script envelope-monogram">S & J</div>
 
-                {/* RIGHT DOOR — shows right half of the image */}
-                <motion.div
-                  className="door right-door"
-                  initial={{ x: 0 }}
-                  exit={{ x: '100%' }}
-                  transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  <picture>
-                    <source media="(max-width: 768px)" srcSet="/opendoormobile.png" />
-                    <img src="/opendoordesk.png" alt="" className="door-image door-image-right" />
-                  </picture>
-                </motion.div>
+              <div className="envelope-names-divider"></div>
 
-                <motion.button
-                  className="open-button"
-                  onClick={handleOpen}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  Open
-                </motion.button>
-              </>
-            )}
-          </AnimatePresence>
+              {/* Couple Names */}
+              <h1 className="font-script envelope-names">Shahabas & Jumana</h1>
 
+              {/* Date */}
+              <p className="font-serif-body envelope-date">09 . 08 . 2026</p>
 
+              {/* Button */}
+              <button className="font-sans-spaced open-invitation-btn" onClick={handleOpen}>
+                Open Invitation
+              </button>
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

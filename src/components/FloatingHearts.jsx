@@ -5,16 +5,33 @@ const FloatingHearts = () => {
   const [hearts, setHearts] = useState([]);
 
   useEffect(() => {
-    // Generate static array of hearts
-    const heartCount = 30; // Number of hearts on screen at once
-    const newHearts = Array.from({ length: heartCount }).map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      animationDuration: `${Math.random() * 8 + 6}s`, // 6 to 14 seconds to float up
-      animationDelay: `${Math.random() * 10}s`, // spread out start times
-      scale: Math.random() * 0.6 + 0.4, // size variation
-      opacity: Math.random() * 0.5 + 0.3, // opacity variation
-    }));
+    const heartCount = 35;
+    const newHearts = Array.from({ length: heartCount }).map((_, i) => {
+      // Pink / meron shades matching the wedding theme
+      const colors = [
+        '#FF85A1', // bright pink
+        '#FF6B8A', // hot pink
+        '#FFB6C1', // light pink
+        '#FF4D6D', // deep rose
+        '#C9184A', // meron/magenta
+        '#8B2635', // burgundy
+        '#FFC8D8', // soft blush
+        '#E8476A', // vivid rose
+      ];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+      return {
+        id: i,
+        left: `${Math.random() * 98}%`,
+        animationDuration: `${Math.random() * 10 + 8}s`,
+        animationDelay: `${Math.random() * -18}s`,
+        scale: Math.random() * 0.5 + 0.5,
+        opacity: Math.random() * 0.4 + 0.45,
+        drift: `${(Math.random() - 0.5) * 70}px`,
+        color: randomColor,
+        size: `${Math.floor(Math.random() * 12 + 14)}px`,
+      };
+    });
     setHearts(newHearts);
   }, []);
 
@@ -28,11 +45,14 @@ const FloatingHearts = () => {
             left: heart.left,
             animationDuration: heart.animationDuration,
             animationDelay: heart.animationDelay,
-            transform: `scale(${heart.scale})`,
-            opacity: heart.opacity,
+            '--heart-scale': heart.scale,
+            '--heart-opacity': heart.opacity,
+            '--heart-drift': heart.drift,
+            color: heart.color,
+            fontSize: heart.size,
           }}
         >
-          &#10084;
+          ♥
         </div>
       ))}
     </div>

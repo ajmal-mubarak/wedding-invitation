@@ -4,36 +4,36 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none; /* Make sure users can click through the hearts */
+  pointer-events: none;
   overflow: hidden;
-  z-index: 100; /* High enough to be above backgrounds, low enough not to block tooltips */
+  z-index: 9999;
 }
 
 .global-floating-heart {
   position: absolute;
-  bottom: -50px;
-  color: var(--color-primary); /* Pink hearts based on primary theme color */
+  bottom: -60px;
   opacity: 0;
-  animation-name: global-float-heart;
-  animation-timing-function: linear;
+  animation-name: float-heart-up;
+  animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  font-size: 24px;
-  text-shadow: 0 0 5px rgba(255, 192, 203, 0.5); /* Soft pink glow */
+  font-size: 20px;
+  user-select: none;
+  line-height: 1;
 }
 
-@keyframes global-float-heart {
+@keyframes float-heart-up {
   0% {
-    transform: translateY(100px) scale(0);
+    transform: translateY(0) translateX(0) scale(var(--heart-scale, 0.8)) rotate(0deg);
     opacity: 0;
   }
-  10% {
-    opacity: var(--opacity, 0.8);
+  8% {
+    opacity: var(--heart-opacity, 0.7);
   }
-  90% {
-    opacity: var(--opacity, 0.8);
+  85% {
+    opacity: var(--heart-opacity, 0.7);
   }
   100% {
-    transform: translateY(-110vh) scale(1.5);
+    transform: translateY(-110vh) translateX(var(--heart-drift, 30px)) scale(var(--heart-scale, 0.8)) rotate(20deg);
     opacity: 0;
   }
 }
