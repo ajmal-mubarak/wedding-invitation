@@ -48,7 +48,7 @@ const Venue = () => {
         
         <div className="footer-content">
           <h3 className="title-font">We can't wait to celebrate with you!</h3>
-          <p className="heading-font gold-text footer-names">JESSICA & JAMES</p>
+          <p className="heading-font gold-text footer-names">SHAHABAS & JUMANA</p>
         </div>
       </div>
       

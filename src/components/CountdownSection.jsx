@@ -6,7 +6,7 @@ const CountdownSection = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isScratched, setIsScratched] = useState(false);
   const canvasRef = useRef(null);
-  const targetDate = new Date('2026-08-21T16:00:00').getTime(); // Updated wedding date
+  const targetDate = new Date('2026-08-09T12:00:00').getTime(); // Updated wedding date
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -133,7 +133,7 @@ const CountdownSection = () => {
         <div className="revealed-content">
           <h3 className="title-font">The Most Holy Rosary Chapel</h3>
           <p className="title-font">Edwin Andrews Air Base Isabel, sta. Maria, Zamboanga City</p>
-          <p className="heading-font gold-text date-time">21/8/2026 at 4 PM</p>
+          <p className="heading-font gold-text date-time">9/8/2026 at 12 PM</p>
         </div>
         {!isScratched && (
           <canvas 

@@ -6,19 +6,19 @@ import './Timeline.css';
 const Timeline = () => {
   const events = [
     {
-      time: "4 PM",
+      time: "12 PM",
       title: "The Ceremony Begins",
       icon: <Church size={24} className="timeline-icon" />,
       direction: 'left'
     },
     {
-      time: "5 PM",
+      time: "1 PM",
       title: "Photos & Cocktails",
       icon: <Camera size={24} className="timeline-icon" />,
       direction: 'right'
     },
     {
-      time: "6 PM",
+      time: "2 PM",
       title: "Reception Follows",
       icon: <Wine size={24} className="timeline-icon" />,
       direction: 'left'
