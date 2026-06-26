@@ -137,10 +137,10 @@ const Venue = () => {
         </motion.p>
       </section>
 
-      {/* 3. ADULTS-ONLY SECTION (Cream Background) */}
-      <section className="adults-only-section">
+      {/* 3. ISLAMIC QUOTE SECTION (Cream Background) */}
+      <section className="quote-section">
         <motion.div 
-          className="adults-card"
+          className="quote-card"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
@@ -152,8 +152,9 @@ const Venue = () => {
           <div className="card-corner bottom-left"></div>
           <div className="card-corner bottom-right"></div>
           
-          <p className="font-serif-body adults-card-text">
-            We love your little ones, but this is an adults-only celebration.
+          <p className="font-serif-body quote-card-text">
+            "Souls are like recruited soldiers; those that recognize one another unite in harmony"
+            <span className="quote-source">— Sahih al-Bukhari</span>
           </p>
 
           <div className="wave-divider gold-small">

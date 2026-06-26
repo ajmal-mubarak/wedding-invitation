@@ -175,21 +175,21 @@
   color: var(--color-gold);
 }
 
-/* 3. Adults Only Section (Cream Background) */
-.adults-only-section {
+/* 3. Islamic Quote Section (Cream Background) */
+.quote-section {
   background-color: var(--color-cream);
   padding: 60px 20px;
   display: flex;
   justify-content: center;
 }
 
-.adults-card {
+.quote-card {
   width: 100%;
   max-width: 380px;
   background-color: var(--color-burgundy);
   color: var(--color-cream);
   border: 1px solid var(--color-gold);
-  padding: 30px 24px;
+  padding: 35px 24px;
   text-align: center;
   position: relative;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -231,11 +231,24 @@
   border-top: none;
 }
 
-.adults-card-text {
-  font-size: 15px;
-  line-height: 1.7;
+.quote-card-text {
+  font-size: 20px;
+  line-height: 1.6;
   font-style: italic;
   opacity: 0.95;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+}
+
+.quote-source {
+  font-size: 13px;
+  font-style: normal;
+  opacity: 0.8;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 /* 4. Footer (Burgundy Background) */
