@@ -153,8 +153,8 @@ const Venue = () => {
           <div className="card-corner bottom-right"></div>
           
           <p className="font-serif-body quote-card-text">
-            "Souls are like recruited soldiers; those that recognize one another unite in harmony"
-            <span className="quote-source">— Sahih al-Bukhari</span>
+            "He created you from a single soul, and made from it its mate, that you might find peace together"
+            <span className="quote-source">— Surah Al-A'raf 7:189</span>
           </p>
 
           <div className="wave-divider gold-small">
